@@ -11,7 +11,7 @@ class User(Base):
     
     id:Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]  = mapped_column(String(30))
-    username: Mapped[str]
+    # username: Mapped[str]
     email: Mapped[str]
     password: Mapped[str]
     created_at = Column(TIMESTAMP(timezone=True),nullable=False,server_default=text("now()"))

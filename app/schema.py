@@ -7,7 +7,7 @@ class User(BaseModel):
     name:str
     email: EmailStr
     password: str = Field(...,min_length=8)
-    username:str
+    # username:str
 
 class Login(BaseModel):
     email: EmailStr
