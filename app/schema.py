@@ -35,3 +35,4 @@ class NoteDictResponse(NoteBase):
     # owner_id: int
 class NoteResponse():
     data: List[NoteDictResponse]
+    

@@ -4,7 +4,7 @@ from .. import schema
 from ..database import get_db
 from ..models import User
 from .. import utils
-from ..oauth2 import create_jwt_token
+from ..oauth2 import create_jwt_token, get_user_details
 from sqlalchemy.orm import Session
 router = APIRouter(tags=['users'], )
 
@@ -65,6 +65,19 @@ def login_user(payload:schema.Login, db:Session = Depends(get_db)):
         "access_token": token,
         "token_type": "bearer",
         "user": {"id": user.id, "email": user.email}
+
     }
+
+
+@router.get('/auth/me', status_code = status.HTTP_200_OK, response_model=schema.User)
+def get_user_details(db:Session =Depends(get_db), id:str = Depends(get_user_details)):
+
+    user = db.query(User).filter(User.id ==id).first()
     
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User does not exists"
+        )
     
+    return user
