@@ -15,6 +15,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = settings.expiry_time
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
         
 def create_jwt_token(data:dict):
+    print('This is create jwt',SECRET_KEY )
     to_encode = data.copy()
     expire = datetime.now(timezone.utc) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({'exp':expire})
@@ -23,7 +24,7 @@ def create_jwt_token(data:dict):
 
 def verify_jwt_token(token:str):
     try:
-        print(token )
+        print(SECRET_KEY )
         decoded_data = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         print(decoded_data)
         id = decoded_data.get('id')
