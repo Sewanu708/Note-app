@@ -8,6 +8,10 @@ class User(BaseModel):
     email: EmailStr
     password: str = Field(...,min_length=8)
     # username:str
+class UserResponse(BaseModel):
+    name:str
+    id: str
+    # username:str
 
 class Login(BaseModel):
     email: EmailStr

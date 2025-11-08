@@ -69,7 +69,7 @@ def login_user(payload:schema.Login, db:Session = Depends(get_db)):
     }
 
 
-@router.get('/auth/me', status_code = status.HTTP_200_OK, response_model=schema.User)
+@router.get('/auth/me', status_code = status.HTTP_200_OK, response_model=schema.UserResponse)
 def get_user_details(db:Session =Depends(get_db), id:str = Depends(get_user_details)):
 
     user = db.query(User).filter(User.id ==id).first()
